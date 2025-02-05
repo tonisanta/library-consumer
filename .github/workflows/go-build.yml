@@ -4,7 +4,7 @@
 name: Go upgrade and build
 
 on:
-  workflow_dispatch:  # manual trigger
+  workflow_dispatch:  # manual or api trigger
 
 jobs:
 
@@ -18,8 +18,9 @@ jobs:
       with:
         go-version: '1.23'
 
-    - name: Upgrade module depedency
-      run: go get github.com/tonisanta/library
+    - name: Upgrade module dependency
+      run:
+        GOPRIVATE=github.com/tonisanta go get -u github.com/tonisanta/library@main
       
     - name: Build
       run: go build -o myapp -v ./cmd/main.go
