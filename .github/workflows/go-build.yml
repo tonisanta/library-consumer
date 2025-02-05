@@ -1,7 +1,7 @@
 # This workflow will build a golang project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
-name: Go build
+name: Go upgrade and build
 
 on:
   workflow_dispatch:  # manual trigger
@@ -18,5 +18,8 @@ jobs:
       with:
         go-version: '1.23'
 
+    - name: Upgrade module depedency
+      run: go get github.com/tonisanta/library
+      
     - name: Build
       run: go build -o myapp -v ./cmd/main.go
